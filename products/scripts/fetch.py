@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from products.models import Product
+from products.models import Product, Brand
 
 base_url = 'https://www.snusbolaget.se'
 
@@ -32,7 +32,8 @@ def create_product(href):
         size=get_size(content_table),
         nicotine_content=get_nicotine(content_table),
         product_url=href,
-        image_url=get_product_image(product_soup)
+        image_url=get_product_image(product_soup),
+        brand=get_brand(content_table)
     ).save()
 
 def get_title(product_soup):
@@ -57,6 +58,11 @@ def get_size(table):
 
 def get_nicotine(table):
     amount = table[7].text.strip()[:-5]
-
     formatted_amount = amount.replace(',', '.')
     return float(formatted_amount)
+
+def get_brand(table):
+    brand_name = table[1].text.strip()
+    obj, brand = Brand.objects.get_or_create(title=brand_name)
+    obj.save()
+    return obj
