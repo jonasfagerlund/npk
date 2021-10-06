@@ -1,13 +1,47 @@
+import math
+from time import sleep
+
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 from products.models import Product, Brand
 
+options = Options()
+options.headless = True
+
+driver = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=options)
+
 base_url = 'https://www.snusbolaget.se'
 
-r = requests.get(base_url + '/snus')
+PRODUCTS_PER_PAGE = 28
 
-base_soup = BeautifulSoup(r.text, 'lxml')
+def get_amount_of_pages():
+    r = requests.get(base_url + '/snus')
+    pagination_soup = BeautifulSoup(r.text, 'lxml')
+    amount_of_products = pagination_soup.find('span', class_ = 'pages').text.strip()[20:-10]
+    amount_of_pages = int(amount_of_products) / PRODUCTS_PER_PAGE
+    amount_of_pages = int(math.ceil(amount_of_pages))
+    return amount_of_pages
+
+
+def get_page_source():
+    driver.get(base_url + '/snus')
+    sleep(2)
+    driver.find_element_by_id('onetrust-accept-btn-handler').click();
+    sleep(2)
+    driver.find_element_by_link_text("No thanks, I'll stay here.").click();
+    sleep(2)
+
+    for x in range(get_amount_of_pages() -1):
+        driver.find_element_by_link_text('Visa fler produkter').click();
+        sleep(4)
+    
+    return driver.page_source
+
+base_soup = BeautifulSoup(get_page_source(), 'lxml')
 
 list_of_products = base_soup.find_all('a', class_ = 'image-box')
 
@@ -17,7 +51,7 @@ def run():
         print(product_url)
         try:
             create_product(product_url)
-        except ValueError:
+        except (ValueError, AttributeError, IndexError):
             continue
 
 def create_product(href):
