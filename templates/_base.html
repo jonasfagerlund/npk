@@ -5,15 +5,29 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Klädkod {% endblock title %}</title>
+    <title>{% block title %}NPK{% endblock title %}</title>
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
+
 <body>
-<div class="container">
-    {% block content %}
-    {% endblock content %}
-</div>
+
+    <header>
+        <div id="logo">
+            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_146347.png&f=1&nofb=1" width="50px">
+        </div>
+
+        <nav>
+            <a href="{% url 'product_list' %}">Produkter</a>
+            <a href="{% url 'product_list' %}">Vad är NPK?</a>
+            <a href="{% url 'about' %}">Om nikotinperkrona.se</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
 
 </body>
 </html>

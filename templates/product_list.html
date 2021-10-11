@@ -1,9 +1,29 @@
 {% extends '_base.html' %}
-{% block title %}Tygbank{% endblock title %}
 {% block content %}
-    {% for product in product_list %}
-        <div>
-            <h2>{{ product.title }}</h2>
-        </div>
-    {% endfor %}
+
+    <table id="snus-table">
+        <thead>
+            <tr id="table-header">
+            <th></th>
+            <th>Produkt</th>
+            <th>Pris per dosa</th>
+            <th>NPK</th>
+            <th></th>
+            </tr>
+        
+        </thead>
+        
+        <tbody>
+            {% for product in product_list %}
+                <tr>
+                    <td><img class="product-img" src="{{ product.image_url }}"></td>
+                    <td class="td-body-text" data-label="Titel:">{{ product.title }}</td>
+                    <td class="td-body-text" data-label="Pris per dosa:">{{ product.price}}:-</td>
+                    <td class="td-body-text" data-label="NPK:">{{ product.npk }}</td>
+                    <td><button id="store-button"><a href="{{ product.product_url }}">Gå till produkt</a></button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock content %}
