@@ -9,14 +9,14 @@
 
     <title>{% block title %}NPK{% endblock title %}</title>
 
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
 </head>
 
 <body>
 
     <header>
         <div id="logo-div">
-            <img id="logo" src="{% static 'images/npk.png' %}">
+            <img id="logo" src="{% static 'npk.png' %}">
         </div>
 
         <nav>
@@ -31,5 +31,6 @@
         {% endblock content %}
     </div>
 
+    <script src="{% static 'base.js' %}"></script>
 </body>
 </html>
