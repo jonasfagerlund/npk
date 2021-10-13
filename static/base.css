@@ -39,10 +39,6 @@ table {
     border-spacing: 0;
 }
 
-thead {
-    color: #fffffe
-}
-
 td {
     text-align: center;
 }
@@ -61,7 +57,8 @@ tr:nth-of-type(odd) {
 }
 
 #table-header {
-    background-color: #004643;
+    background-color: #f9bc60;
+    font-weight: 300;
 }
 
 #table-header th {
@@ -69,13 +66,27 @@ tr:nth-of-type(odd) {
 }
 
 #store-button {
+    background-color: #fffffe;
+    margin: 10px 0 10px 0;
+    padding: 5px;
+    transition: all 0.4s ease 0s;
+    border-radius: 50px;
+}
+
+#store-button:hover {
     background-color: #f9bc60;
+    border-radius: 0px;
+    transition: all 0.4s ease 0s;
 }
 
 #store-button a {
     text-decoration: none;
     color: #001e1d;
+    font-size: 20px;
+    margin: 5px 0 5px 0;
 }
+
+
 
 #logo-div {
     flex-basis: 50%;
@@ -117,12 +128,12 @@ tr:nth-of-type(odd) {
     }
 
     tr {
-        border: solid black 1px;
+        border: solid #001e1d 1px;
     }
 
     td {
         display: block;
-        border: solid black 1px;
+        border: solid #001e1d 1px;
     }
 
     td:before {
@@ -149,6 +160,10 @@ tr:nth-of-type(odd) {
     #image-showcase {
         max-width: 80%;
         max-height: 80%;
+    }
+
+    #store-button {
+        background-color: #f9bc60;
     }
 }
 
