@@ -17,24 +17,21 @@ header {
 }
 
 nav {
-    flex-basis: 50%;
+    flex-basis: 60%;
+    flex-direction: row;
     display: flex;
+    justify-content: space-around;
 }
 
 nav a {
     text-decoration: none;
     text-align: center;
-    flex-grow: 1;
+    flex-shrink: 1;
     color: #fffffe;
 }
 
 nav a:hover {
     color: #f9bc60;
-}
-
-#logo {
-    flex-basis: 50%;
-    margin-left: 2%;
 }
 
 table {
@@ -80,7 +77,25 @@ tr:nth-of-type(odd) {
     color: #001e1d;
 }
 
+#logo-div {
+    flex-basis: 50%;
+    margin-left: 2%;
+}
+
+#logo {
+    width: 50px;
+}
+
 @media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        border: solid #fffffe 1px;
+        margin-right: 3%;
+    }
+
     thead {
         display: none;
     }
@@ -119,6 +134,6 @@ tr:nth-of-type(odd) {
 @media (min-width: 1200px) {
     .container {
         margin: 0 auto;
-        max-width: 1440px;
+        max-width: 1200px;
     }
 }
